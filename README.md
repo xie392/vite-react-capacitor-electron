@@ -1,7 +1,30 @@
-# Capacitor + Electron 
+# Capacitor + Electron
 
 通过 `Capacitor` 构建 `Android` 和 `ios`, 并使用 `Electron` 构建桌面应用的模版。集成了 `i18n`。
 
+# 运行前配置
+
+## Android 端
+
+-   安装 `Android Studio`
+-   安装 `Java`
+-   安装 `Gradle`
+-   安装 `Android SDK`
+-   配置 `ANDROID_HOME` 环境变量
+
+## iOS 端
+
+-   安装 `Xcode`
+-   安装 `CocoaPods`
+-   安装 `ios-deploy`
+-   安装 `ios-sim`
+-   安装 `ios-deploy`
+-   配置 `PATH` 环境变量
+
+## Electron 端
+
+1、安装 `Node.js`
+2、安装 `pnpm`
 
 # 手机端开发热更新配置
 
@@ -25,10 +48,10 @@ pnpm run dev
 
 ```ts
 const config: CapacitorConfig = {
-  server: {
-    url: "把上面运行出来的地址填到这里，如： http://192.....:5173/",
-    cleartext: true
-  }
+	server: {
+		url: '把上面运行出来的地址填到这里，如： http://192.....:5173/',
+		cleartext: true
+	}
 }
 ```
 
