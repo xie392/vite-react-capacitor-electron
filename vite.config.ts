@@ -13,7 +13,7 @@ const PRELOAD_INPUT = path.resolve(__dirname, 'electron/preload.ts')
 export default defineConfig({
 	plugins: [
 		react(),
-		target === 'electron' &&
+		(!target || target === 'electron') &&
 			electron({
 				main: {
 					entry: ELECTRON_ENTRY

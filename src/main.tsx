@@ -1,14 +1,9 @@
 import ReactDOM from 'react-dom/client'
-import { StrictMode, Suspense } from 'react'
+import { StrictMode } from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import { useRoutes } from 'react-router-dom'
-import routes from '~react-pages'
-import Loading from '@/components/ui/loading'
 import '@/i18n'
 import '@/styles/global.scss'
-
-// eslint-disable-next-line react-refresh/only-export-components
-const App = () => <Suspense fallback={<Loading />}>{useRoutes(routes)}</Suspense>
+import App from './app'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<StrictMode>

@@ -2,7 +2,7 @@
     "translateModel": 1,
     "strict": false,
     "filePath": "./",
-    "targetPath": "/src/locales",
+    "targetPath": "/src/i18n/locales",
     "languageList": [
         "ZH",
         "EN",
@@ -22,7 +22,6 @@
         "public",
         "language",
         "database",
-        "lang",
         "i18n"
     ],
     "fileSuffix": [

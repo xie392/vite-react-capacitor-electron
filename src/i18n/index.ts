@@ -13,7 +13,7 @@ export const defaultLanguage = 'zh'
 export default (async () => {
 	const locales = await Promise.all(
 		languages.map(async (key) => {
-			const translationModule = await import(`../locales/${key}.json`)
+			const translationModule = await import(`./locales/${key}.json`)
 			return {
 				[key]: {
 					translation: translationModule.default
@@ -24,7 +24,7 @@ export default (async () => {
 
 	i18next.use(LanguageDetector).init({
 		detection: {
-			lookupLocalStorage: 'coss_language'
+			lookupLocalStorage: 'LANGUAGE'
 		},
 		resources: locales,
 		fallbackLng: defaultLanguage,
