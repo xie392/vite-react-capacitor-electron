@@ -39,3 +39,13 @@ jobs:
 
             - name: Build project
               run: npm run build:electron
+
+            - name: Package Electron App
+              run: npm run build:electron
+
+            - name: Publish Electron App
+              if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+              run: |
+                  npx electron-builder --publish always
+              env:
+                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
