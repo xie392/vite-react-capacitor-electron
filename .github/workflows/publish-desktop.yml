@@ -28,19 +28,10 @@ jobs:
             - name: Install dependencies
               run: npm install
 
-            - name: Run format code
-              run: npm run format
-
             - name: Run linter
               run: npm run lint
 
-            - name: Run translate
-              run: npm run translate
-
             - name: Build project
-              run: npm run build:electron
-
-            - name: Package Electron App
               run: npm run build:electron
 
             - name: Publish Electron App

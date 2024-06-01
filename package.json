@@ -14,7 +14,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "translate": "node node_modules/vue-auto-translate/server.js",
-    "format": "prettier --write ./src/**/*.{ts,tsx,css,scss}"
+    "format": "prettier --write ./src/**/*.{ts,tsx,scss}"
   },
   "dependencies": {
     "@capacitor/android": "^6.0.0",
