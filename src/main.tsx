@@ -1,19 +1,31 @@
-import ReactDOM from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import { StrictMode } from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import '@/i18n'
+import { BrowserRouter, HashRouter } from 'react-router-dom'
+import { i18nInit } from '@/i18n'
 import '@/styles/global.scss'
 import App from './app'
+import useCommonStore from '@/stores/common'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+i18nInit()
+
+const commonStore = useCommonStore.getState()
+commonStore.init()
+
+// Determine the router type based on the environment
+// eslint-disable-next-line react-refresh/only-export-components
+const Router = __IS_ELECTRON__ ? HashRouter : BrowserRouter
+
+createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<BrowserRouter>
+		<Router>
 			<App />
-		</BrowserRouter>
+		</Router>
 	</StrictMode>
 )
 
 // Use contextBridge
-// window.ipcRenderer.on('main-process-message', (_event, message) => {
-// 	console.log(message)
-// })
+if (__IS_ELECTRON__) {
+	window.ipcRenderer.on('main-process-message', (_event, message) => {
+		console.log(message)
+	})
+}

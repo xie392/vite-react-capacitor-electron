@@ -1,3 +1,4 @@
+import { LANGUAGE } from '@/utils/constants'
 import i18next from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 
@@ -10,7 +11,7 @@ export const langs = [
 export const languages = langs.map((lang) => lang.code)
 export const defaultLanguage = 'zh'
 
-export default (async () => {
+export const i18nInit = async () => {
 	const locales = await Promise.all(
 		languages.map(async (key) => {
 			const translationModule = await import(`./locales/${key}.json`)
@@ -24,7 +25,7 @@ export default (async () => {
 
 	i18next.use(LanguageDetector).init({
 		detection: {
-			lookupLocalStorage: 'LANGUAGE'
+			lookupLocalStorage: LANGUAGE
 		},
 		resources: locales,
 		fallbackLng: defaultLanguage,
@@ -33,6 +34,6 @@ export default (async () => {
 			escapeValue: false
 		}
 	})
-})()
+}
 
 export const $t = i18next.t

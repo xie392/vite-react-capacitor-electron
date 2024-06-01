@@ -1,4 +1,5 @@
-import { langs } from '@/i18n'
+import { defaultLanguage, langs } from '@/i18n'
+import { LANGUAGE } from '@/utils/constants'
 import i18next from 'i18next'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router'
@@ -8,15 +9,18 @@ const useI18n = () => {
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		console.log('params.lang', params.lang)
+		const lang = localStorage.getItem(LANGUAGE) ?? defaultLanguage
+		i18next.changeLanguage(lang)
+	}, [])
+
+	useEffect(() => {
 		if (!params.lang) return
 		const language = location.pathname.split('/')[1]
 		if (langs.some((l) => l.code === language)) {
 			i18next.changeLanguage(language)
 			return
 		}
-
-		navigate('/')
+		navigate('/not-found')
 	}, [params.lang, navigate])
 }
 
