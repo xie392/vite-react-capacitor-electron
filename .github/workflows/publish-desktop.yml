@@ -1,0 +1,41 @@
+name: publish-desktop
+
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches:
+            - master
+
+jobs:
+    build:
+        runs-on: ${{ matrix.platform }}
+
+        strategy:
+            matrix:
+                platform: [ubuntu-latest, macos-latest, windows-latest]
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: '20'
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Run format code
+              run: npm run format
+
+            - name: Run linter
+              run: npm run lint
+
+            - name: Run translate
+              run: npm run translate
+
+            - name: Build project
+              run: npm run build:electron
