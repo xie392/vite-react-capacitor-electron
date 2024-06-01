@@ -39,4 +39,4 @@ jobs:
               run: |
                   npx electron-builder --publish always
               env:
-                  github_token: ${{ secrets.github_token }}
+                  GH_TOKEN: ${{ secrets.GH_TOKEN }}

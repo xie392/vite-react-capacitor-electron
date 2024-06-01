@@ -33,6 +33,9 @@
 	publish: {
 		provider: 'github',
 		releaseType: 'release',
-		publishAutoUpdate: false
+		publishAutoUpdate: false,
+		provider: 'github',
+		owner: 'xie392',
+		repo: 'GH_TOKEN'
 	}
 }
