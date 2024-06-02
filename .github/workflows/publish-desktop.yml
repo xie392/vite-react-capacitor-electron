@@ -1,26 +1,25 @@
-name: publish-desktop
+name: Build and Release Electron App
 
 on:
     push:
-        branches:
-            - master
-    pull_request:
+        tags:
+            - 'v*'
         branches:
             - master
 
 jobs:
     build:
-        runs-on: ${{ matrix.platform }}
+        runs-on: ubuntu-latest
 
         strategy:
             matrix:
-                platform: [macos-latest, windows-latest]
+                os: [macos-latest, windows-latest]
 
         steps:
-            - name: Checkout repository
+            - name: Checkout code
               uses: actions/checkout@v2
 
-            - name: Set up Node.js
+            - name: Setup Node.js
               uses: actions/setup-node@v2
               with:
                   node-version: '20'
@@ -28,14 +27,43 @@ jobs:
             - name: Install dependencies
               run: npm install
 
-            - name: Run linter
-              run: npm run lint
-
-            - name: Build project
+            - name: Build Electron app
               run: npm run build:electron
 
-            - name: Upload Artifact
-              uses: paneron/action-electron-builder@v1.8.1
+            - name: Upload artifact
+              uses: actions/upload-artifact@v2
               with:
-                  package_manager: pnpm
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  name: electron-app
+                  path: dist_electron
+
+    release:
+        runs-on: ubuntu-latest
+        needs: build
+
+        steps:
+            - name: Download artifact
+              uses: actions/download-artifact@v2
+              with:
+                  name: electron-app
+                  path: ./dist_electron
+
+            - name: Create Release
+              id: create_release
+              uses: actions/create-release@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tag_name: ${{ github.ref }}
+                  release_name: Release ${{ github.ref }}
+                  draft: false
+                  prerelease: false
+
+            - name: Upload Release Asset
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  upload_url: ${{ steps.create_release.outputs.upload_url }}
+                  asset_path: ./dist_electron
+                  asset_name: electron-vite-app-${{ matrix.os }}
+                  asset_content_type: application/zip

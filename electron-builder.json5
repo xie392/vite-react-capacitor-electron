@@ -26,10 +26,5 @@
 		perMachine: false,
 		allowToChangeInstallationDirectory: true,
 		deleteAppDataOnUninstall: false
-	},
-	publish: {
-		provider: 'github',
-		owner: 'xie392',
-		repo: 'vite-react-capacitor-electron'
 	}
 }
