@@ -1,4 +1,4 @@
-name: publish-window
+name: Build and Release Electron App (Windows)
 
 on:
     push:
@@ -51,14 +51,18 @@ jobs:
             - name: List files for debugging
               run: ls -R ./dist-electron
 
+            - name: Get current tag
+              id: get_tag
+              run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
             - name: Create Release
               id: create_release
               uses: actions/create-release@v1
               env:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
               with:
-                  tag_name: ${{ github.ref }}
-                  release_name: Release ${{ github.ref }}
+                  tag_name: ${{ env.TAG_NAME }}
+                  release_name: Release ${{ env.TAG_NAME }}
                   draft: false
                   prerelease: false
 
