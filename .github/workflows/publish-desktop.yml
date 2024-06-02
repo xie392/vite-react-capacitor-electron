@@ -13,7 +13,7 @@ jobs:
 
         strategy:
             matrix:
-                os: [macos-latest, windows-latest]
+                os: [macos-latest, ubuntu-latest, windows-latest]
 
         steps:
             - name: Checkout code
@@ -43,11 +43,17 @@ jobs:
         needs: build
 
         steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
             - name: Download artifact
               uses: actions/download-artifact@v2
               with:
                   name: electron-app
                   path: ./dist_electron
+
+            - name: List files for debugging
+              run: ls -R ./dist_electron
 
             - name: Create Release
               id: create_release
