@@ -1,6 +1,6 @@
 {
 	"name": "vite-react-capacitor-electron",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"type": "module",
 	"description": "A cross-platform desktop app built with Vite, React, Capacitor, and Electron.",
 	"scripts": {
