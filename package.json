@@ -9,7 +9,7 @@
 		"dev:android": "npm run build && npx cap sync && npx cap copy",
 		"dev:ios": "npm run build && npx cap sync && npx cap copy",
 		"build": "tsc && vite build",
-		"build:electron": "tsc && vite build -c vite.electron.config.ts && electron-builder --publish never",
+		"build:electron": "tsc && vite build -c vite.electron.config.ts && electron-builder",
 		"build:mobile": "npm run build && npx cap sync",
 		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "vite preview",

@@ -1,24 +1,25 @@
+/**
+ * @see https://www.electron.build/configuration/configuration
+ */
 {
-	$schema: 'https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json',
 	appId: 'YourAppID',
 	asar: true,
-	productName: 'vite-react-capacitor-electron',
 	directories: {
 		output: 'release/${version}'
 	},
-	files: ['dist', 'dist-electron'],
+	files: ['dist-electron', 'dist'],
 	mac: {
-		target: ['dmg'],
-		artifactName: '${productName}-${os}-${arch}-${version}-Installer.${ext}'
+		artifactName: '${productName}_${version}.${ext}',
+		target: ['dmg', 'zip']
 	},
 	win: {
 		target: [
 			{
 				target: 'nsis',
-				arch: ['x64', 'arm64']
+				arch: ['x64']
 			}
 		],
-		artifactName: '${productName}-${os}-${arch}-${version}-Setup.${ext}'
+		artifactName: '${productName}_${version}.${ext}'
 	},
 	nsis: {
 		oneClick: false,
@@ -26,16 +27,9 @@
 		allowToChangeInstallationDirectory: true,
 		deleteAppDataOnUninstall: false
 	},
-	linux: {
-		target: ['AppImage'],
-		artifactName: '${productName}-${os}-${arch}-${version}.${ext}'
-	},
 	publish: {
 		provider: 'github',
-		releaseType: 'release',
-		publishAutoUpdate: false,
-		provider: 'github',
 		owner: 'xie392',
-		repo: 'GH_TOKEN'
+		repo: 'vite-react-capacitor-electron'
 	}
 }

@@ -34,9 +34,8 @@ jobs:
             - name: Build project
               run: npm run build:electron
 
-            - name: Publish Electron App
-              if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-              run: |
-                  npx electron-builder --publish always
-              env:
-                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+            - name: Upload Artifact
+              uses: paneron/action-electron-builder@v1.8.1
+              with:
+                  package_manager: pnpm
+                  github_token: ${{ secrets.GH_TOKEN }}
