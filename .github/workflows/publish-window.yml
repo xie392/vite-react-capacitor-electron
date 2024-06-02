@@ -1,4 +1,4 @@
-name: Build and Release Electron App
+name: publish-window
 
 on:
     push:
@@ -9,11 +9,7 @@ on:
 
 jobs:
     build:
-        runs-on: ubuntu-latest
-
-        strategy:
-            matrix:
-                os: [macos-latest, windows-latest]
+        runs-on: windows-latest
 
         steps:
             - name: Checkout code
@@ -35,11 +31,11 @@ jobs:
             - name: Upload artifact
               uses: actions/upload-artifact@v2
               with:
-                  name: electron-app
+                  name: electron-app-windows
                   path: dist-electron
 
     release:
-        runs-on: ubuntu-latest
+        runs-on: windows-latest
         needs: build
 
         steps:
@@ -49,7 +45,7 @@ jobs:
             - name: Download artifact
               uses: actions/download-artifact@v2
               with:
-                  name: electron-app
+                  name: electron-app-windows
                   path: ./dist-electron
 
             - name: List files for debugging
@@ -73,5 +69,5 @@ jobs:
               with:
                   upload_url: ${{ steps.create_release.outputs.upload_url }}
                   asset_path: ./dist-electron
-                  asset_name: electron-vite-app-${{ matrix.os }}
+                  asset_name: electron-vite-app-windows.zip
                   asset_content_type: application/zip

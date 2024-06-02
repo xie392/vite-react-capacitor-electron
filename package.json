@@ -56,5 +56,14 @@
 		"vite-plugin-pages": "^0.32.1",
 		"vue-auto-translate": "^1.1.13"
 	},
-	"main": "dist-electron/main.js"
+	"main": "dist-electron/main.js",
+	"author": {
+		"name": "xie392",
+		"email": "ymzdjiang@qq.com",
+		"url": "https://github.com/xie392"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/xie392/vite-react-capacitor-electron.git"
+	}
 }
