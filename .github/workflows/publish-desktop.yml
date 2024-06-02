@@ -50,10 +50,10 @@ jobs:
               uses: actions/download-artifact@v2
               with:
                   name: electron-app
-                  path: ./dist_electron
+                  path: ./dist-electron
 
             - name: List files for debugging
-              run: ls -R ./dist_electron
+              run: ls -R ./dist-electron
 
             - name: Create Release
               id: create_release
@@ -72,6 +72,6 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
               with:
                   upload_url: ${{ steps.create_release.outputs.upload_url }}
-                  asset_path: ./dist_electron
+                  asset_path: ./dist-electron
                   asset_name: electron-vite-app-${{ matrix.os }}
                   asset_content_type: application/zip
